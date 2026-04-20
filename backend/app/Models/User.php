@@ -23,7 +23,18 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
+
+    public function fieldsCreated()
+    {
+        return $this->hasMany(Field::class, 'created_by');
+    }
+
+    public function fieldsAssigned()
+    {
+        return $this->hasMany(Field::class, 'assigned_agent_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
