@@ -1,0 +1,40 @@
+
+  Dropping all tables ............................................... 24s DONE
+
+   INFO  Preparing database.  
+
+  Creating migration table ........................................... 5s DONE
+
+   INFO  Running migrations.  
+
+  0001_01_01_000000_create_users_table .............................. 14s DONE
+  0001_01_01_000001_create_cache_table ............................... 5s DONE
+  0001_01_01_000002_create_jobs_table ................................ 5s DONE
+  2026_04_19_220453_create_personal_access_tokens_table .............. 4s DONE
+  2026_04_20_134846_add_role_to_users_table .......................... 2s DONE
+  2026_04_20_134847_create_field_updates_table ....................... 1s FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000]: General error: 1824 Failed to open the referenced table 'fields' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: smart_season, SQL: alter table `field_updates` add constraint `field_updates_field_id_foreign` foreign key (`field_id`) references `fields` (`id`) on delete cascade)
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+    834▕             $exceptionType = $this->isUniqueConstraintError($e)
+    835▕                 ? UniqueConstraintViolationException::class
+    836▕                 : QueryException::class;
+    837▕ 
+  ➜ 838▕             throw new $exceptionType(
+    839▕                 $this->getNameWithReadWriteType(),
+    840▕                 $query,
+    841▕                 $this->prepareBindings($bindings),
+    842▕                 $e,
+
+      [2m+9 vendor frames [22m
+
+  10  database/migrations/2026_04_20_134847_create_field_updates_table.php:14
+      Illuminate\Support\Facades\Facade::__callStatic()
+      [2m+37 vendor frames [22m
+
+  48  artisan:16
+      Illuminate\Foundation\Application::handleCommand()
+
