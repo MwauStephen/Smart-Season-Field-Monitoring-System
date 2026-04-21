@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\FieldUpdateController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', function (Request $request) {
@@ -22,4 +23,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/fields/{id}/updates', [FieldUpdateController::class, 'getFieldHistory']);
     Route::post('/fields/{id}/updates', [FieldUpdateController::class, 'logFieldUpdate']);
+
+    // User management (Admin only)
+    Route::get('/agents', [UserController::class, 'getAgents']);
+    Route::post('/users', [UserController::class, 'createNewUser']);
 });
