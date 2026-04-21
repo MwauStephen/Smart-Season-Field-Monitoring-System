@@ -26,6 +26,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // User management (Admin only)
     Route::get('/agents', [UserController::class, 'getAgents']);
+    Route::get('/admins', [UserController::class, 'getAdmins']);
     Route::post('/users', [UserController::class, 'createNewUser']);
 });
 require __DIR__.'/auth.php';

@@ -24,6 +24,20 @@ class UserController extends Controller
     }
 
     /**
+     * Get all admins (for Admin use).
+     */
+    public function getAdmins(Request $request)
+    {
+        if ($request->user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
+
+        $admins = User::where('role', 'admin')->get(['id', 'name', 'email', 'role']);
+        
+        return response()->json($admins);
+    }
+
+    /**
      * Create a new agent or admin user (Admin only).
      */
     public function createNewUser(Request $request)
