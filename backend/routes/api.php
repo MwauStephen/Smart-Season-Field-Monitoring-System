@@ -28,3 +28,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/agents', [UserController::class, 'getAgents']);
     Route::post('/users', [UserController::class, 'createNewUser']);
 });
+require __DIR__.'/auth.php';
