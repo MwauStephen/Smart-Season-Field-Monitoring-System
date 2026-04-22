@@ -31,9 +31,10 @@ class DashboardController extends Controller
             ->get();
 
         return response()->json([
+            'total_fields' => $assignedFields->count(),
+            'fields_per_status' => $assignedFields->groupBy('status')->map->count(),
+            'fields_per_stage' => $assignedFields->groupBy('stage')->map->count(),
             'assigned_fields' => $assignedFields,
-            'status_overview' => $assignedFields->groupBy('status')->map->count(),
-            // The frontend handles 'Quick update actions' using the assigned_fields data
         ]);
     }
 }
