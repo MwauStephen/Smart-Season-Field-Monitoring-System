@@ -91,22 +91,22 @@ export default function DashboardPage() {
         />
         <MetricCard 
           title="Active Growth" 
-          value={stats?.fields_per_status.Active || 0} 
+          value={stats?.fields_per_status?.Active || 0} 
           icon={Timer} 
           trend="In progress"
           color="blue-500"
         />
         <MetricCard 
           title="At Risk" 
-          value={stats?.fields_per_status["At Risk"] || 0} 
+          value={stats?.fields_per_status?.["At Risk"] || 0} 
           icon={AlertTriangle} 
           trend="Action required"
           color="destructive"
-          isAlert={Boolean(stats?.fields_per_status["At Risk"])}
+          isAlert={Boolean(stats?.fields_per_status?.["At Risk"])}
         />
         <MetricCard 
           title="Completed" 
-          value={stats?.fields_per_status.Completed || 0} 
+          value={stats?.fields_per_status?.Completed || 0} 
           icon={CheckCircle2} 
           trend="Harvested"
           color="emerald-600"
