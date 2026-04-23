@@ -16,11 +16,14 @@ import {
   Sprout,
   Activity,
   History,
-  MoreHorizontal
+  MoreHorizontal,
+  Trash2,
+  Edit2
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -109,9 +112,11 @@ export default function FieldsPage() {
       });
       setIsCreateOpen(false);
       setNewField({ name: "", crop_type: "", planting_date: "", assigned_agent_id: "" });
+      toast.success("Field created successfully!");
       fetchData();
     } catch (error) {
       console.error("Failed to create field", error);
+      toast.error("Failed to create field.");
     }
   };
 
@@ -125,9 +130,22 @@ export default function FieldsPage() {
       });
       setIsUpdateOpen(false);
       setUpdateData({ stage: "", notes: "" });
+      toast.success("Progress logged successfully!");
       fetchData();
     } catch (error) {
       console.error("Failed to log update", error);
+      toast.error("Failed to log update.");
+    }
+  };
+
+  const handleDeleteField = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this field? This action cannot be undone.")) return;
+    try {
+      await fieldService.deleteField(id);
+      toast.success("Field deleted successfully.");
+      fetchData();
+    } catch (error) {
+      toast.error("Failed to delete field.");
     }
   };
 
@@ -230,7 +248,7 @@ export default function FieldsPage() {
       {/* Fields List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredFields.map(field => (
-          <Card key={field.id} className="border-none shadow-lg hover:shadow-xl transition-all duration-300 group bg-white/80 backdrop-blur-sm overflow-hidden">
+          <Card key={field.id} className="border-none shadow-lg hover:shadow-xl transition-all duration-300 group bg-card/80 backdrop-blur-sm overflow-hidden">
             <CardContent className="p-0">
               <div className="p-6 space-y-4">
                 <div className="flex justify-between items-start">
@@ -287,10 +305,15 @@ export default function FieldsPage() {
                       setUpdateData({ stage: field.stage, notes: "" });
                       setIsUpdateOpen(true);
                     }}>
-                      Log Progress
+                      <History className="w-4 h-4 mr-2" /> Log Progress
                     </DropdownMenuItem>
                     {isAdmin && (
-                      <DropdownMenuItem className="text-destructive">Delete Field</DropdownMenuItem>
+                      <DropdownMenuItem 
+                        className="text-destructive focus:text-destructive focus:bg-destructive/10"
+                        onClick={() => handleDeleteField(field.id)}
+                      >
+                        <Trash2 className="w-4 h-4 mr-2" /> Delete Field
+                      </DropdownMenuItem>
                     )}
                   </DropdownMenuContent>
                 </DropdownMenu>
