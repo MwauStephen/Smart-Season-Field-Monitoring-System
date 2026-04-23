@@ -13,14 +13,18 @@ import {
   LogOut, 
   Sprout, 
   ChevronRight,
-  ClipboardList
+  ClipboardList,
+  Moon,
+  Sun
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 
 export function Sidebar() {
   const pathname = usePathname();
   const { user, logout, isAdmin } = useAuth();
+  const { theme, setTheme } = useTheme();
 
   const adminLinks = [
     { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
@@ -36,7 +40,7 @@ export function Sidebar() {
   const links = isAdmin ? adminLinks : agentLinks;
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-brand-dark border-r border-border shadow-sm">
+    <div className="flex flex-col h-full bg-white dark:bg-brand-dark border-r border-border shadow-sm overflow-hidden">
       <div className="p-6 flex items-center gap-3">
         <div className="bg-brand-green/10 p-2 rounded-lg ring-1 ring-brand-green/20">
           <Sprout className="w-6 h-6 text-brand-green" />
@@ -46,7 +50,7 @@ export function Sidebar() {
         </span>
       </div>
 
-      <div className="px-4 flex-1 space-y-6 overflow-y-auto">
+      <div className="px-4 flex-1 space-y-6 overflow-y-auto overflow-x-hidden scrollbar-hide">
         <div className="space-y-1">
           <p className="px-2 pb-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
             Main Menu
@@ -106,6 +110,26 @@ export function Sidebar() {
               <p className="text-[10px] text-muted-foreground capitalize font-medium">{user?.role}</p>
             </div>
           </div>
+
+          {/* <div className="flex gap-2 mb-3">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className={cn("flex-1 h-8 rounded-lg", theme === 'light' && "bg-brand-green/10 border-brand-green text-brand-green")}
+              onClick={() => setTheme('light')}
+            >
+              <Sun className="w-3.5 h-3.5 mr-1.5" /> Light
+            </Button>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className={cn("flex-1 h-8 rounded-lg", theme === 'dark' && "bg-brand-green/10 border-brand-green text-brand-green")}
+              onClick={() => setTheme('dark')}
+            >
+              <Moon className="w-3.5 h-3.5 mr-1.5" /> Dark
+            </Button>
+          </div> */}
+
           <Button 
             variant="ghost" 
             size="sm" 
