@@ -4,6 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { userService } from "@/lib/services/user.service";
 import { User } from "@/types/auth";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 import { 
   Plus, 
   Users, 
@@ -12,11 +16,9 @@ import {
   Mail, 
   Calendar,
   Search,
-  MoreHorizontal
+  MoreHorizontal,
+  Trash2
 } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -44,6 +46,12 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
 
 export default function UsersPage() {
   const { isAdmin } = useAuth();
@@ -97,9 +105,23 @@ export default function UsersPage() {
       });
       setIsCreateOpen(false);
       setNewUser({ name: "", email: "", password: "", password_confirmation: "", role: "agent" });
+      toast.success("User account created successfully.");
       fetchData();
     } catch (error) {
       console.error("Failed to create user", error);
+      toast.error("Failed to create user account.");
+    }
+  };
+
+  const handleDeleteUser = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this user? This action cannot be undone.")) return;
+    try {
+      await userService.deleteUser(id);
+      toast.success("User deleted successfully.");
+      fetchData();
+    } catch (error: any) {
+      const message = error.response?.data?.message || "Failed to delete user.";
+      toast.error(message);
     }
   };
 
@@ -185,7 +207,7 @@ export default function UsersPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-none shadow-lg bg-white/60 backdrop-blur-sm">
+        <Card className="border-none shadow-lg bg-card/60 backdrop-blur-sm">
           <CardContent className="p-6 flex items-center gap-4">
             <div className="bg-brand-green/10 p-3 rounded-2xl">
               <Users className="w-6 h-6 text-brand-green" />
@@ -196,7 +218,7 @@ export default function UsersPage() {
             </div>
           </CardContent>
         </Card>
-        <Card className="border-none shadow-lg bg-white/60 backdrop-blur-sm">
+        <Card className="border-none shadow-lg bg-card/60 backdrop-blur-sm">
           <CardContent className="p-6 flex items-center gap-4">
             <div className="bg-blue-100 p-3 rounded-2xl">
               <ShieldCheck className="w-6 h-6 text-blue-600" />
@@ -207,7 +229,7 @@ export default function UsersPage() {
             </div>
           </CardContent>
         </Card>
-        <Card className="border-none shadow-lg bg-white/60 backdrop-blur-sm">
+        <Card className="border-none shadow-lg bg-card/60 backdrop-blur-sm">
           <CardContent className="p-6 flex items-center gap-4">
             <div className="bg-orange-100 p-3 rounded-2xl">
               <UserCircle className="w-6 h-6 text-orange-600" />
@@ -221,7 +243,7 @@ export default function UsersPage() {
       </div>
 
       {/* Users Table Card */}
-      <Card className="border-none shadow-xl bg-white/60 backdrop-blur-sm overflow-hidden">
+      <Card className="border-none shadow-xl bg-card/60 backdrop-blur-sm overflow-hidden">
         <CardHeader className="border-b border-border/50 pb-4 flex flex-row items-center justify-between">
           <CardTitle className="text-lg font-bold">User Directory</CardTitle>
           <div className="relative w-72">
@@ -274,9 +296,23 @@ export default function UsersPage() {
                     </div>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger 
+                        render={
+                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                            <MoreHorizontal className="h-4 w-4" />
+                          </Button>
+                        }
+                      />
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem 
+                          className="text-destructive focus:text-destructive focus:bg-destructive/10"
+                          onClick={() => handleDeleteUser(user.id)}
+                        >
+                          <Trash2 className="w-4 h-4 mr-2" /> Delete User
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                 </TableRow>
               ))}
