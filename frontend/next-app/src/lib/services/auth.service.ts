@@ -8,8 +8,13 @@ export const authService = {
   },
 
   async logout(): Promise<void> {
-    await api.post("/logout");
-    localStorage.removeItem("croplens_token");
-    localStorage.removeItem("croplens_user");
+    try {
+      await api.post("/logout");
+    } catch (error) {
+      console.warn("Logout API request failed, but clearing local session anyway.", error);
+    } finally {
+      localStorage.removeItem("croplens_token");
+      localStorage.removeItem("croplens_user");
+    }
   },
 };
