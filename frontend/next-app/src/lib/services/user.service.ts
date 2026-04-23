@@ -16,4 +16,8 @@ export const userService = {
     const response = await api.post<{ message: string; user: User }>("/users", data);
     return response.data;
   },
+
+  async deleteUser(id: number) {
+    await api.delete(`/users/${id}`);
+  },
 };
