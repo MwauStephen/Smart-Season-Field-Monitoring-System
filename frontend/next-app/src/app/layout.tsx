@@ -14,6 +14,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "CropLens | Smart Season Field Monitoring",
   description: "Track crop progress across multiple fields during the growing season.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
