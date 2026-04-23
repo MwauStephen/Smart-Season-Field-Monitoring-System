@@ -12,6 +12,7 @@ interface BannerCarouselProps {
 const images = [
   "/hero-banner-slider-one.png",
   "/hero-bg.png",
+  "hero-bg-3.jpg"
 ];
 
 export function BannerCarousel({ userName, role }: BannerCarouselProps) {
