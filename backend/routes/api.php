@@ -28,5 +28,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/agents', [UserController::class, 'getAgents']);
     Route::get('/admins', [UserController::class, 'getAdmins']);
     Route::post('/users', [UserController::class, 'createNewUser']);
+    Route::delete('/users/{id}', [UserController::class, 'deleteUser']);
 });
 require __DIR__.'/auth.php';
