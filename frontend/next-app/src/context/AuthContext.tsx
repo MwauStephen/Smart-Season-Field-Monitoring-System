@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { User, LoginCredentials } from "@/types/auth";
 import { authService } from "@/lib/services/auth.service";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface AuthContextType {
   user: User | null;
@@ -47,6 +48,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = async () => {
     try {
       await authService.logout();
+      toast.success("You have been logged out safely.");
     } finally {
       setUser(null);
       router.push("/login");
