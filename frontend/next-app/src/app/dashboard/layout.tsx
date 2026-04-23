@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   if (!user) return null;
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#F8FAFC]">
+    <div className="flex h-screen overflow-hidden bg-background">
       {/* Desktop Sidebar */}
       <aside className="hidden lg:flex lg:w-72 lg:flex-col lg:inset-y-0">
         <Sidebar />
@@ -42,22 +42,22 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto relative">
         {/* Mobile Header */}
-        <header className="lg:hidden sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-white/80 backdrop-blur-md px-6 shadow-sm">
+        <header className="lg:hidden sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background/80 backdrop-blur-md px-6 shadow-sm">
           <Sheet>
             <SheetTrigger 
               className={cn(
                 buttonVariants({ variant: "ghost", size: "icon" }),
-                "text-brand-dark flex items-center justify-center rounded-lg hover:bg-muted"
+                "text-foreground flex items-center justify-center rounded-lg hover:bg-muted"
               )}
             >
               <Menu className="h-6 w-6" />
               <span className="sr-only">Toggle navigation</span>
             </SheetTrigger>
-            <SheetContent side="left" className="p-0 w-72">
+            <SheetContent side="left" className="p-0 w-72 border-r-0">
               <Sidebar />
             </SheetContent>
           </Sheet>
-          <span className="text-lg font-bold tracking-tight text-brand-dark">
+          <span className="text-lg font-bold tracking-tight text-foreground">
             Crop<span className="text-brand-green">Lens</span>
           </span>
         </header>
