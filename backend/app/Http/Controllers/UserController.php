@@ -65,4 +65,24 @@ class UserController extends Controller
             'user' => $user
         ], 201);
     }
+    /**
+     * Delete a user (Admin only).
+     */
+    public function deleteUser(Request $request, $id)
+    {
+        if ($request->user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
+
+        $user = User::findOrFail($id);
+        
+        // Prevent admin from deleting themselves
+        if ($request->user()->id === $user->id) {
+            return response()->json(['message' => 'You cannot delete your own account.'], 400);
+        }
+
+        $user->delete();
+
+        return response()->json(['message' => 'User deleted successfully.']);
+    }
 }
