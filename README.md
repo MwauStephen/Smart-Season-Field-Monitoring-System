@@ -92,7 +92,7 @@ npm run dev # Runs on http://localhost:5173
 Nexy js application :https://smart-season-field-monitoring-syste-orpin.vercel.app/login
 
 React SPA application:
-https://smart-season-monitoring-system.vercel.app/
+https://crop-lens.vercel.app/login
 
 ##  Demo Credentials
 
