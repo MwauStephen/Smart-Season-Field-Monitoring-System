@@ -214,6 +214,26 @@ Follow these steps in order to verify that all components (Auth, RBAC, Fields, a
   - `fields_per_status`: `{"Active": 1}`
 
 ---
+## Project Screenshots 
+
+**Login Page**
+![Login Page](login.png)
+
+
+**Dashboard Overview**
+![Dashboard]
+   - ![home-1](home-1.png)
+   - ![home-2](home-2.png)
+   - ![home-3](home-3.png)
+
+**field Page**
+![field Page](field.png)
+
+**Users Page**
+![users Page](user.png)
+
+**Dark Mode feature**
+![darkmode](darkmode.png)
 
 ## Troubleshooting Tips
 
