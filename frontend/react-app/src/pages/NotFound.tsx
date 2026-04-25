@@ -17,9 +17,9 @@ export default function NotFound() {
         
         <div className="space-y-2">
           <h1 className="text-8xl font-black text-brand-dark dark:text-white tracking-tighter">404</h1>
-          <h2 className="text-2xl font-bold text-muted-foreground">Field Not Found</h2>
+          <h2 className="text-2xl font-bold text-muted-foreground">Field Lost in the Fog</h2>
           <p className="text-muted-foreground max-w-md mx-auto font-medium">
-            It seems you've wandered into an unmapped sector. The page you are looking for doesn't exist or has been moved.
+            It seems you've wandered into an unmapped sector. Don't worry, your crops are still safe!
           </p>
         </div>
 
