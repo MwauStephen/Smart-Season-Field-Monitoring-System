@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { fieldService } from "@/lib/services/field.service";
 import type { Field } from "@/types/field";
@@ -8,7 +8,6 @@ import {
   AlertTriangle,
   CheckCircle2,
   Timer,
-  Plus,
   ArrowUpRight,
   TrendingUp,
   Sprout,
@@ -82,7 +81,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="h-full flex items-center justify-center p-20">
-         <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-10 h-10 text-brand-green animate-spin" />
           <p className="text-muted-foreground font-medium animate-pulse">Synchronizing Dashboard...</p>
         </div>

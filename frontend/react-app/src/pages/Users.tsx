@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { userService } from "@/lib/services/user.service";
 import type { User } from "@/types/auth";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { 
   Plus, 
   Users, 
   ShieldCheck, 
   UserCircle, 
-  Mail, 
-  Calendar,
   Search,
   MoreHorizontal,
   Trash2,

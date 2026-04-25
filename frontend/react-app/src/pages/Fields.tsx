@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import{ useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { fieldService } from "@/lib/services/field.service";
 import type { Field } from "@/types/field";
@@ -8,8 +8,6 @@ import {
   Plus, 
   Search, 
   Filter, 
-  MoreVertical, 
-  MapPin, 
   Calendar, 
   User as UserIcon,
   Sprout,
@@ -17,7 +15,6 @@ import {
   History,
   MoreHorizontal,
   Trash2,
-  Edit2,
   Loader2
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";

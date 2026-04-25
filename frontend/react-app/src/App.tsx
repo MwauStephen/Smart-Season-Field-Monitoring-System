@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from '@/context/AuthContext'
 import { Toaster } from 'sonner'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
