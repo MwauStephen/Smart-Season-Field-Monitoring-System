@@ -108,6 +108,44 @@ export default function LoginPage() {
                 "Sign In"
               )}
             </Button>
+            <div className="w-full space-y-3">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-muted-foreground/20" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-transparent px-2 text-muted-foreground font-medium">Demo Credentials</span>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <Button 
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-9 text-[10px] uppercase tracking-wider font-bold border-brand-green/30 hover:bg-brand-green/10 hover:text-brand-green"
+                  onClick={() => {
+                    setEmail("admin@test.com");
+                    setPassword("password");
+                  }}
+                >
+                  Login as Admin
+                </Button>
+                <Button 
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-9 text-[10px] uppercase tracking-wider font-bold border-brand-green/30 hover:bg-brand-green/10 hover:text-brand-green"
+                  onClick={() => {
+                    setEmail("agent@test.com");
+                    setPassword("password");
+                  }}
+                >
+                  Login as Agent
+                </Button>
+              </div>
+            </div>
+
             <p className="text-xs text-center text-muted-foreground">
               By signing in, you agree to the CropLens terms of service.
             </p>
